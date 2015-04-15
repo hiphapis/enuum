@@ -1,0 +1,2 @@
+# enuum
+Rails Enum Helpers
