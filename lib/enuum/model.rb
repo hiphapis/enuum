@@ -49,7 +49,7 @@ module Enuum
         properties = data.values.map(&:keys).flatten.compact.uniq
         properties.each do |property|
           define_method "#{name}_#{property}" do
-            self.send("#{name}_map")[property.to_sym]
+            self.send("#{name}_map")[property.to_sym] if self.send(name).present?
           end
 
           define_singleton_method "#{name}_#{property}" do |key|
@@ -59,7 +59,7 @@ module Enuum
       end
 
       define_method "#{name}_map" do
-        self.class.send("#{name}_map")[self.send(name).to_sym] if self.send(name)
+        self.class.send("#{name}_map")[self.send(name).to_sym] if self.send(name).present?
       end
 
       define_method "#{name}_label" do
